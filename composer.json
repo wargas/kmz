@@ -1,0 +1,16 @@
+{
+    "name": "wargas/kmz",
+    "authors": [
+        {
+            "name": "Wargas",
+            "email": "wargasteixeira@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Kmz\\": "src/"
+        }
+    }
+
+}
