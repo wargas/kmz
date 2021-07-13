@@ -39,19 +39,22 @@ class Kmz
         $data = [];
         foreach ($elements as $element) {
             $name = $element->getElementsByTagName("name");
+            $coordinates = $element->getElementsByTagName("coordinates");
             $longitude = $element->getElementsByTagName("longitude");
             $latitude = $element->getElementsByTagName("latitude");
             $altitude = $element->getElementsByTagName("altitude");
 
-            if ($longitude->item(0)) {
+            $point = new \stdClass;
 
-                $data[] = [
-                    "name" => $name->item(0)->textContent,
-                    "longitude" => $longitude->item(0)->textContent,
-                    "latitude" => $latitude->item(0)->textContent,
-                    "altitude" => $altitude->item(0)->textContent,
-                ];
-            }
+            
+
+            $point->name =  $name->item(0) ? $name->item(0)->textContent : "";
+            $point->longitude =  $longitude->item(0) ? $longitude->item(0)->textContent : "";
+            $point->latitude =  $latitude->item(0) ? $latitude->item(0)->textContent : "";
+            $point->altitude =  $altitude->item(0) ? $altitude->item(0)->textContent : "";
+            $point->line =  $coordinates->item(0) ? str_replace(["\n", "\t"], "", $coordinates->item(0)->textContent) : "";
+
+            $data[] = $point;
         }
 
         return $data;
